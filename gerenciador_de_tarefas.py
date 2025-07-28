@@ -2,13 +2,12 @@ import os
 import cmath
 import time
 
-pular_linha = 70 * ('-')
+pular_linha = 70 * ('-') # Para evitar digitar a mesma coisa quando precisar
 
-lista_de_tarefas = ['Comer', 'Ir no mercado', 'Sair']
-quantidade_de_itens_na_lista = len(lista_de_tarefas)
+lista_de_tarefas = ['Comer', 'Ir no mercado', 'Sair'] #Lista de tarefas do usuário
+quantidade_de_itens_na_lista = len(lista_de_tarefas) 
 
 #Mensagem de inicio e cadastro do usuário:
-
 print('Seja bem-vindo ao gerenciador de tarefas, para iniciar, digite o seu nome: ', end='')
 
 nome_usuario = input('').capitalize()
@@ -16,8 +15,7 @@ nome_usuario = input('').capitalize()
 print(f'Usuário "{nome_usuario}" cadastrado com sucesso!')
 print(pular_linha)
 
-
-
+#Menu principal para escolha de opção do usuário:
 def menu_escolha_de_opcao():
 
     print('Menu de opções:')
@@ -26,7 +24,8 @@ def menu_escolha_de_opcao():
         )
 
     print(pular_linha)
-    
+
+#Tenta validar a escolha do usuário:
     try:
         print('Digite o que deseja realizar no programa: ', end='')
         escolha_de_opcao = int(input())
@@ -47,12 +46,13 @@ def menu_escolha_de_opcao():
             case 2:
                 print('Essa é a sua lista no momento: ')
                 loop_mostrar_lista()
-                          
+
+#Retorna uma mensagem de erro e redireciona o usuário ao menu novamente para validar novamente:      
     except ValueError:
         print('Por favor, digite apenas opções válidas: ')
         menu_escolha_de_opcao()
 
-
+#Faz o gerencionamento da lista para adicionar ou remover(a programar) algo da lista:
 def opcao_um_gerenciar_lista():
     resposta_adicionar_item_na_lista = input().upper()
     print(pular_linha)
@@ -68,7 +68,7 @@ def opcao_um_gerenciar_lista():
 
         loop_mostrar_lista()
 
-
+#Faz a iteração dos itens na lista (lista_de_tarefas) e mostra ao usuário:
 def loop_mostrar_lista():
     i = 0
     numeracao_lista = 1
@@ -88,12 +88,14 @@ def loop_mostrar_lista():
             print(pular_linha)
             voltar_ao_menu()
 
+#Funçao para voltar ao menu para evitar digitar toda vez:
 def voltar_ao_menu():
 
     voltar_ao_menu_mensagem = input('Aperte "ENTER" para voltar ao menu.')
     os.system('cls')
     menu_escolha_de_opcao()
 
+#Inicia o menu principal de escolhas de opção:
 menu_escolha_de_opcao() 
 
 
