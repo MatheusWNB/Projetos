@@ -4,18 +4,29 @@ import time
 
 pular_linha = 70 * ('-')
 
-def voltar_ao_menu():
-
-    voltar_ao_menu_mensagem = input('Aperte "ENTER" para voltar ao menu.')
-    os.system('cls')
-    menu_escolha_de_opcao()
-
 lista_de_tarefas = ['Comer', 'Ir no mercado', 'Sair']
 quantidade_de_itens_na_lista = len(lista_de_tarefas)
+
+#Mensagem de inicio e cadastro do usuário:
+
+print('Seja bem-vindo ao gerenciador de tarefas, para iniciar, digite o seu nome: ', end='')
+
+nome_usuario = input('').capitalize()
+
+print(f'Usuário "{nome_usuario}" cadastrado com sucesso!')
+print(pular_linha)
+
 
 
 def menu_escolha_de_opcao():
 
+    print('Menu de opções:')
+    print('1 => Gerenciar lista de tarefas \n'
+        '2 => Mostrar lista de Tarefas'
+        )
+
+    print(pular_linha)
+    
     try:
         print('Digite o que deseja realizar no programa: ', end='')
         escolha_de_opcao = int(input())
@@ -77,7 +88,14 @@ def loop_mostrar_lista():
             print(pular_linha)
             voltar_ao_menu()
 
-menu_escolha_de_opcao()
+def voltar_ao_menu():
+
+    voltar_ao_menu_mensagem = input('Aperte "ENTER" para voltar ao menu.')
+    os.system('cls')
+    menu_escolha_de_opcao()
+
+menu_escolha_de_opcao() 
+
 
 
 
