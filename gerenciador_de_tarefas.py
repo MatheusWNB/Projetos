@@ -2,8 +2,10 @@ import os
 import cmath
 import time
 
-pular_linha = 70 * ('-') # Para evitar digitar a mesma coisa quando precisar
+#Para evitar digitar as mesmas coisas
+pular_linha = 70 * ('-') 
 
+#Coisas relacionado a listas:
 lista_de_tarefas = ['Comer', 'Ir no mercado', 'Sair'] #Lista de tarefas do usuário
 quantidade_de_itens_na_lista = len(lista_de_tarefas) 
 
@@ -39,10 +41,11 @@ def menu_escolha_de_opcao():
                           )
                     
                 else:
-                    print(f'Essa é a sua lista no momento: {lista_de_tarefas}. ')
-                    print('Deseja adicionar alguma coisa? S/N: ')
+                    print('Deseja adicionar alguma coisa? "S/N" ou ' \
+                    'deseja remover algo da lista? "R": '
+                    )
 
-                opcao_um_gerenciar_lista()
+                gerenciar_lista()
 
             case 2:
                 print('Essa é a sua lista no momento: ')
@@ -51,6 +54,7 @@ def menu_escolha_de_opcao():
             case 5:
                 print('Saindo do programa...')
                 time.sleep(2)
+                os.system('cls')
                 print('Aplicativo encerrado.')
 
 #Retorna uma mensagem de erro e redireciona o usuário ao menu novamente para validar novamente:      
@@ -58,12 +62,12 @@ def menu_escolha_de_opcao():
         print('Por favor, digite apenas opções válidas: ')
         menu_escolha_de_opcao()
 
-#Faz o gerencionamento da lista para adicionar ou remover(a programar) algo da lista:
-def opcao_um_gerenciar_lista():
-    resposta_adicionar_item_na_lista = input().upper()
-    print(pular_linha)
+#Faz o gerencionamento da lista para adicionar ou remover algo da lista:
+def gerenciar_lista():
+    adicionar_remover_algo_da_lista = input().upper()
+    os.system('cls')
 
-    if resposta_adicionar_item_na_lista == 'S':
+    if adicionar_remover_algo_da_lista == 'S':
         print('Digite oque você deseja adicionar na lista: ', end='')
 
         adicionar_item_na_lista = input()
@@ -72,6 +76,23 @@ def opcao_um_gerenciar_lista():
 
         print(f'Essa é a sua lista atualizada: ')
 
+        loop_mostrar_lista()
+
+    elif adicionar_remover_algo_da_lista == 'R':
+        print(f'Essa é a sua lista: {lista_de_tarefas}.')
+        print('')
+        
+        print('Para remover algo, digite o índice que corresponde ao item que '
+              'que deseja remover: ', end= '')
+        
+        remover_item_da_lista = int(input())
+
+        print(f'O item "{lista_de_tarefas[remover_item_da_lista]}" foi removido da lista. ')
+
+        lista_de_tarefas.pop(remover_item_da_lista)
+
+        print('Lista atualizada com sucesso: ')
+        print(pular_linha)
         loop_mostrar_lista()
 
 #Faz a iteração dos itens na lista (lista_de_tarefas) e mostra ao usuário:
