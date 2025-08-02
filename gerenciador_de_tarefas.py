@@ -20,7 +20,8 @@ def menu_escolha_de_opcao():
 
     print('Menu de opções:')
     print('1 => Gerenciar lista de tarefas \n'
-        '2 => Mostrar lista de Tarefas'
+        '2 => Mostrar lista de Tarefas \n'
+        '5 => Encerrar o programa'
         )
 
     print(pular_linha)
@@ -46,6 +47,11 @@ def menu_escolha_de_opcao():
             case 2:
                 print('Essa é a sua lista no momento: ')
                 loop_mostrar_lista()
+
+            case 5:
+                print('Saindo do programa...')
+                time.sleep(2)
+                print('Aplicativo encerrado.')
 
 #Retorna uma mensagem de erro e redireciona o usuário ao menu novamente para validar novamente:      
     except ValueError:
