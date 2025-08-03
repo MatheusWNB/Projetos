@@ -82,18 +82,26 @@ def gerenciar_lista():
         print(f'Essa é a sua lista: {lista_de_tarefas}.')
         print('')
         
-        print('Para remover algo, digite o índice que corresponde ao item que '
-              'que deseja remover: ', end= '')
-        
-        remover_item_da_lista = int(input())
 
-        print(f'O item "{lista_de_tarefas[remover_item_da_lista]}" foi removido da lista. ')
+        while True:
+            print('Para remover algo, digite o índice que corresponde ao item que '
+                'que deseja remover: ', end= '')
+            
+            remover_item_da_lista = int(input())
 
-        lista_de_tarefas.pop(remover_item_da_lista)
+            try:
+                print(f'O item "{lista_de_tarefas[remover_item_da_lista]}" foi removido da lista. ')
 
-        print('Lista atualizada com sucesso: ')
-        print(pular_linha)
-        loop_mostrar_lista()
+                lista_de_tarefas.pop(remover_item_da_lista)
+
+                print('Lista atualizada com sucesso: ')
+                print(pular_linha)
+                loop_mostrar_lista()
+
+            except IndexError:
+                print('Por favor, digite uma opção válida.')
+                print(pular_linha)
+
 
 #Faz a iteração dos itens na lista (lista_de_tarefas) e mostra ao usuário:
 def loop_mostrar_lista():
