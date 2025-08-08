@@ -23,21 +23,6 @@ def menu_inicial():
 
     print(f'Usuário "{nome_usuario}" cadastrado com sucesso!')
     print(pular_linha)
-    validar_acessar_lista()
-
-acessar_lista = ''
-def validar_acessar_lista():
-    print('Digite a lista que deseja acessar:')
-    print()
-
-    for nome in usuario:
-        print(f'{nome}')
-
-    acessar_lista = input()
-
-    print(f'Lista de "{acessar_lista}" acessada com sucesso! ')
-    print(pular_linha)
-    menu_escolha_de_opcao()
 
 #Faz a validação para acessar uma lista específica
 
@@ -104,14 +89,14 @@ def gerenciar_lista():
 
         adicionar_item_na_lista = input()
 
-        usuario[validar_acessar_lista].append(adicionar_item_na_lista)
+        usuario[acessar_lista].append(adicionar_item_na_lista)
 
         print(f'Essa é a sua lista atualizada: ')
 
         loop_mostrar_lista()
 
     elif adicionar_remover_algo_da_lista == 'R':
-        print(f'Essa é a sua lista: {lista_de_tarefas}.')
+        print(f'Essa é a sua lista: {usuario[acessar_lista]}.')
         print('')
 
         while True:
@@ -122,7 +107,7 @@ def gerenciar_lista():
 
             try:
                 print(
-                    f'O item "{lista_de_tarefas[remover_item_da_lista]}" foi removido da lista. ')
+                    f'O item "{remover_item_da_lista}" foi removido da lista. ')
 
                 lista_de_tarefas.pop(remover_item_da_lista)
 
@@ -140,7 +125,7 @@ def loop_mostrar_lista():
 
     numeracao_lista = 1
     
-    for indice in usuario[validar_acessar_lista]:
+    for indice in usuario[acessar_lista]:
 
         numeracao_string = str(numeracao_lista)
         print(f'{numeracao_string} => {indice}')
@@ -156,4 +141,18 @@ def voltar_ao_menu():
 
 
 # Inicia o programa com o menu inicial de cadastro de usuário
-menu_inicial()
+
+while True:
+    menu_inicial()
+    
+    print('Digite a lista que deseja acessar:')
+    print()
+
+    for nome in usuario:
+        print(f'{nome}')
+
+    acessar_lista = input()
+
+    print(f'Lista de "{acessar_lista}" acessada com sucesso! ')
+    print(pular_linha)
+    menu_escolha_de_opcao()
