@@ -11,7 +11,7 @@ tarefas = [[],
            []
            ]
 
-usuario = {'Matheus': tarefas[0],
+usuario = {
            }
 
 # Mensagem de inicio e cadastro do usuário:
@@ -19,7 +19,15 @@ def menu_inicial():
     print('Seja bem-vindo ao gerenciador de tarefas, para iniciar, digite o seu nome: ', end='')
 
     nome_usuario = input('')
-    usuario[nome_usuario] = tarefas[1]
+    i = 0
+    while True:
+        if tarefas[i]:
+            i += 1
+            continue
+
+        else:
+            usuario[nome_usuario] = tarefas[i]
+            break
 
     print(f'Usuário "{nome_usuario}" cadastrado com sucesso!')
     print(pular_linha)
@@ -32,7 +40,7 @@ def menu_escolha_de_opcao():
     print('1 => Gerenciar lista de tarefas \n'
           '2 => Mostrar lista de Tarefas \n'
           '3 => Acessar outra lista \n'
-          '4 => Adicionar outro usuário'
+          '4 => Adicionar outro usuário \n'
           '5 => Encerrar o programa'
           )
 
