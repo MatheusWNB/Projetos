@@ -24,8 +24,6 @@ def menu_inicial():
     print(f'Usuário "{nome_usuario}" cadastrado com sucesso!')
     print(pular_linha)
 
-#Faz a validação para acessar uma lista específica
-
 # Menu principal para escolha de opção do usuário:
 
 def menu_escolha_de_opcao():
@@ -34,7 +32,8 @@ def menu_escolha_de_opcao():
     print('1 => Gerenciar lista de tarefas \n'
           '2 => Mostrar lista de Tarefas \n'
           '3 => Acessar outra lista \n'
-          '4 => Encerrar o programa'
+          '4 => Adicionar outro usuário'
+          '5 => Encerrar o programa'
           )
 
     print(pular_linha)
@@ -64,9 +63,11 @@ def menu_escolha_de_opcao():
 
             case 3:
                 os.system('cls')
-                validar_acessar_lista()
 
             case 4:
+                menu_inicial()
+
+            case 5:
                 print('Saindo do programa...')
                 time.sleep(2)
                 os.system('cls')
@@ -109,7 +110,7 @@ def gerenciar_lista():
                 print(
                     f'O item "{remover_item_da_lista}" foi removido da lista. ')
 
-                lista_de_tarefas.pop(remover_item_da_lista)
+                usuario[acessar_lista].pop(remover_item_da_lista)
 
                 print('Lista atualizada com sucesso: ')
                 print(pular_linha)
@@ -140,19 +141,25 @@ def voltar_ao_menu():
     menu_escolha_de_opcao()
 
 
-# Inicia o programa com o menu inicial de cadastro de usuário
-
+# Loop do programa com validação para cada ação
+validar = False
+menu_inicial()
 while True:
-    menu_inicial()
+    if validar == True:
+        menu_inicial()
     
-    print('Digite a lista que deseja acessar:')
-    print()
+    if validar == False:
+        print('Digite a lista que deseja acessar:')
+        print()
 
-    for nome in usuario:
-        print(f'{nome}')
+        for nome in usuario:
+            print(f'{nome}')
 
-    acessar_lista = input()
+        acessar_lista = input()
 
-    print(f'Lista de "{acessar_lista}" acessada com sucesso! ')
-    print(pular_linha)
-    menu_escolha_de_opcao()
+        print(f'Lista de "{acessar_lista}" acessada com sucesso! ')
+        print(pular_linha)
+        menu_escolha_de_opcao()
+
+    if validar == None:
+        menu_escolha_de_opcao()
