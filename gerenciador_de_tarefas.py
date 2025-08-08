@@ -1,49 +1,75 @@
 import os
-import cmath
 import time
 
-#Para evitar digitar as mesmas coisas
-pular_linha = 70 * ('-') 
+# Para evitar digitar as mesmas coisas
+pular_linha = 70 * ('-')
 
-#Coisas relacionado a listas:
-lista_de_tarefas = ['Comer', 'Ir no mercado', 'Sair'] #Lista de tarefas do usuário
-quantidade_de_itens_na_lista = len(lista_de_tarefas) 
+# Listas
+tarefas = [[],
+           [],
+           [],
+           []
+           ]
 
-#Mensagem de inicio e cadastro do usuário:
-print('Seja bem-vindo ao gerenciador de tarefas, para iniciar, digite o seu nome: ', end='')
+usuario = {'Matheus': tarefas[0],
+           }
 
-nome_usuario = input('').capitalize()
+# Mensagem de inicio e cadastro do usuário:
+def menu_inicial():
+    print('Seja bem-vindo ao gerenciador de tarefas, para iniciar, digite o seu nome: ', end='')
 
-print(f'Usuário "{nome_usuario}" cadastrado com sucesso!')
-print(pular_linha)
+    nome_usuario = input('')
+    usuario[nome_usuario] = tarefas[1]
 
-#Menu principal para escolha de opção do usuário:
+    print(f'Usuário "{nome_usuario}" cadastrado com sucesso!')
+    print(pular_linha)
+    validar_acessar_lista()
+
+acessar_lista = ''
+def validar_acessar_lista():
+    print('Digite a lista que deseja acessar:')
+    print()
+
+    for nome in usuario:
+        print(f'{nome}')
+
+    acessar_lista = input()
+
+    print(f'Lista de "{acessar_lista}" acessada com sucesso! ')
+    print(pular_linha)
+    menu_escolha_de_opcao()
+
+#Faz a validação para acessar uma lista específica
+
+# Menu principal para escolha de opção do usuário:
+
 def menu_escolha_de_opcao():
 
     print('Menu de opções:')
     print('1 => Gerenciar lista de tarefas \n'
-        '2 => Mostrar lista de Tarefas \n'
-        '5 => Encerrar o programa'
-        )
+          '2 => Mostrar lista de Tarefas \n'
+          '3 => Acessar outra lista \n'
+          '4 => Encerrar o programa'
+          )
 
     print(pular_linha)
 
-#Tenta validar a escolha do usuário:
+# Tenta validar a escolha do usuário:
     try:
         print('Digite o que deseja realizar no programa: ', end='')
         escolha_de_opcao = int(input())
 
         match escolha_de_opcao:
             case 1:
-                if not lista_de_tarefas:
+                if not usuario[acessar_lista]:
                     print('Sua lista está vazia no momento, '
                           'gostaria de adicionar algo? S/N: '
                           )
-                    
+
                 else:
-                    print('Deseja adicionar alguma coisa? "S/N" ou ' \
-                    'deseja remover algo da lista? "R": '
-                    )
+                    print('Deseja adicionar alguma coisa? "S/N" ou '
+                          'deseja remover algo da lista? "R": '
+                          )
 
                 gerenciar_lista()
 
@@ -51,18 +77,24 @@ def menu_escolha_de_opcao():
                 print('Essa é a sua lista no momento: ')
                 loop_mostrar_lista()
 
-            case 5:
+            case 3:
+                os.system('cls')
+                validar_acessar_lista()
+
+            case 4:
                 print('Saindo do programa...')
                 time.sleep(2)
                 os.system('cls')
                 print('Aplicativo encerrado.')
 
-#Retorna uma mensagem de erro e redireciona o usuário ao menu novamente para validar novamente:      
+# Retorna uma mensagem de erro e redireciona o usuário ao menu novamente para validar novamente:
     except ValueError:
         print('Por favor, digite apenas opções válidas: ')
         menu_escolha_de_opcao()
 
-#Faz o gerencionamento da lista para adicionar ou remover algo da lista:
+# Faz o gerencionamento da lista para adicionar ou remover algo da lista:
+
+
 def gerenciar_lista():
     adicionar_remover_algo_da_lista = input().upper()
     os.system('cls')
@@ -72,7 +104,7 @@ def gerenciar_lista():
 
         adicionar_item_na_lista = input()
 
-        lista_de_tarefas.append(adicionar_item_na_lista)
+        usuario[validar_acessar_lista].append(adicionar_item_na_lista)
 
         print(f'Essa é a sua lista atualizada: ')
 
@@ -81,16 +113,16 @@ def gerenciar_lista():
     elif adicionar_remover_algo_da_lista == 'R':
         print(f'Essa é a sua lista: {lista_de_tarefas}.')
         print('')
-        
 
         while True:
             print('Para remover algo, digite o índice que corresponde ao item que '
-                'que deseja remover: ', end= '')
-            
+                  'que deseja remover: ', end='')
+
             remover_item_da_lista = int(input())
 
             try:
-                print(f'O item "{lista_de_tarefas[remover_item_da_lista]}" foi removido da lista. ')
+                print(
+                    f'O item "{lista_de_tarefas[remover_item_da_lista]}" foi removido da lista. ')
 
                 lista_de_tarefas.pop(remover_item_da_lista)
 
@@ -103,36 +135,25 @@ def gerenciar_lista():
                 print(pular_linha)
 
 
-#Faz a iteração dos itens na lista (lista_de_tarefas) e mostra ao usuário:
+# Faz a iteração dos itens na lista (tarefas) e mostra ao usuário:
 def loop_mostrar_lista():
-    i = 0
+
     numeracao_lista = 1
+    
+    for indice in usuario[validar_acessar_lista]:
 
-    indices_lista = len(lista_de_tarefas)
+        numeracao_string = str(numeracao_lista)
+        print(f'{numeracao_string} => {indice}')
 
-    while indices_lista:
+    voltar_ao_menu()
 
-        try:
-            numeracao_string = str(numeracao_lista)
-            print(f'{numeracao_string} => {lista_de_tarefas[i]}')
-
-            i += 1
-            numeracao_lista += 1
-
-        except:
-            print(pular_linha)
-            voltar_ao_menu()
-
-#Funçao para voltar ao menu para evitar digitar toda vez:
+# Funçao para voltar ao menu para evitar digitar toda vez:
 def voltar_ao_menu():
 
     voltar_ao_menu_mensagem = input('Aperte "ENTER" para voltar ao menu.')
     os.system('cls')
     menu_escolha_de_opcao()
 
-#Inicia o menu principal de escolhas de opção:
-menu_escolha_de_opcao() 
 
-
-
-
+# Inicia o programa com o menu inicial de cadastro de usuário
+menu_inicial()
